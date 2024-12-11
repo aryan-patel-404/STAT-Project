@@ -1,0 +1,24 @@
+---
+title: "Welcome to Our Website"
+format: html
+editor: visual
+toc: false
+about: 
+  template: jolla
+  links:
+    - text: LinkedIn
+      href: https://www.linkedin.com/in/aryan-patel-kolagani/
+    - text: LinkedIn
+      href: https://www.linkedin.com/in/rithvik-madhavaram-619421269/
+    - text: LinkedIn
+      href: https://www.linkedin.com/in/kashyap-kandibanda/
+---
+
+
+
+# STAT 515 FINAL PROJECT
+
+This Project is an Analysis of Dataset sourced from webpage, forming multiple reserach questions and answering them using data modeling techniques taught in class.
+
+
+Feel free to explore around.

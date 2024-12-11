@@ -1,0 +1,54 @@
+---
+title: "Research Question3"
+format: html
+editor: visual
+toc: true
+about: 
+  template: solana
+---
+The third research inquiry looks into: *How do applicant income and education level influence loan approval decisions, and is there a significant interaction between these factors in determining loan status?* The objective is to ascertain whether these factors influence the possibility of loan approval both separately and in combination. In order to handle multicollinearity and determine the most significant variables, this analysis employs logistic regression with Lasso regularization to evaluate the predictive ability of applicant income and education.
+
+## Statistical Method and Methodology:
+
+1.	Data Preparation: 
+
+•	Loan Status was converted to a binary factor (1 for approved and 0 for not approved) to fit the logistic regression model.
+
+•	Missing values in key variables (Applicant Income and Loan Amount) were removed.
+
+•	The dataset was split into training (70%) and testing (30%) sets to evaluate the model's performance.
+
+2.	Lasso Regression: 
+
+•	Lasso regression, a form of logistic regression with L1L1-regularization, was used to predict Loan Status based on Applicant Income and Education. Lasso helps in feature selection by shrinking less significant coefficients to zero, addressing multicollinearity, and improving model interpretability.
+
+3.	Evaluation:
+
+•	The model was evaluated on the test set using accuracy as the primary metric.
+
+•	Predictions were categorized as approved (1) or not approved (0) based on a 0.5 probability threshold.
+
+4.	Visualization:
+
+•	A grouped bar plot visualizes the average applicant income by Education and Loan Status.
+
+## Key Results and Insights:
+
+1.	Model Performance: 
+
+•	The Lasso regression model achieved an accuracy of 0.6949153 demonstrating its effectiveness in predicting loan approval status based on the selected predictors.
+
+2.	Predictor Influence: 
+
+•	Applicant Income emerged as a significant predictor, with higher incomes positively associated with loan approval.
+
+•	The categorical variable Education was also influential, with graduates showing a higher likelihood of approval compared to non-graduates.
+3.	Visualization:
+
+![](P7.png)
+
+The grouped bar plot illustrated these relationships, showing that average applicant income for approved loans (Loan Status = 1) was consistently higher than for rejected loans (Loan Status = 0) across both education levels. Graduates generally had higher average incomes compared to non-graduates, irrespective of loan status.
+
+## Implications: 
+
+The analysis reveals that applicant income and education level significantly influence loan approval decisions. Financial institutions can use these insights to refine their risk assessment models, giving weight to both financial stability and educational background. This approach could help expand access to credit for lower-income applicants with strong educational qualifications. For applicants, the findings emphasize the importance of demonstrating financial capacity and leveraging educational credentials to improve approval odds.

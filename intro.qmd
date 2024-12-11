@@ -1,0 +1,21 @@
+---
+title: "Introduction"
+format: html
+editor: visual
+toc: true
+about: 
+  template: solana
+---
+This project's goal is to investigate and evaluate important variables that affect loan approval decisions in the context of a financial dataset. In the financial industry, loan approval procedures are crucial since they affect both applicants and institutions. Knowing how different factors affect loan acceptance has grown crucial as the use of data-driven decision-making grows. In order to give stakeholders in the financial sector useful information, this project will employ statistical models to find and analyze correlations between variables including income, dependents, marital status, education level, and loan amounts.
+
+The dataset is sourced from "OpenML" webpage. Information on 614 loan applications, including applicant details like income, education, marital status, dependents, credit history, property area, loan amount, and loan approval status, are included in the dataset for this study. This dataset, which has been anonymized for study, was acquired from a financial institution. This initiative is guided by the following research questions:
+
+1.	What factors significantly influence the approval of a loan (Loan Status)?
+2.	Is there a significant relationship between income levels (Applicant Income and Co-applicant Income) and the loan amount granted (Loan Amount)?
+3.	How do applicant income and education level influence loan approval decisions, and is there a significant interaction between these factors in determining loan status?
+
+Our project's goal is to use strong statistical techniques to find patterns and links in the dataset. Through thorough study of these research topics, the project not only shows how statistical approaches can be applied, but it also emphasizes how they may be used practically to enhance loan decision-making procedures. Financial institutions may be able to simplify their loan approval procedures while lowering risks and guaranteeing decision-making equity with the use of the insights gathered from this investigation.
+
+View of Dataset:
+![](dataset.png)
+

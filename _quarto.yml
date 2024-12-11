@@ -1,0 +1,46 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  back-to-top-navigation: true
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: intro.qmd
+        text: Introduction
+      - href: rq1.qmd
+        text: Question1
+      - href: rq2.qmd
+        text: Question2
+      - href: rq3.qmd
+        text: Question3
+      - href: Future.qmd
+        text: Future Scope
+      - href: Reference.qmd
+        text: References
+      - href: codes.qmd
+        text: Codes
+      - href: about.qmd
+        text: About
+
+tools:
+      - icon: LinkedIn
+        menu:
+          - text: Aryan Profile
+            href: https://github.com/aryan-patel-404
+          - text: Rithvik Profile
+            href: https://github.com/Rithvikmadhavaram
+
+
+format:
+  html:
+    theme: sandstone
+    mainfont: times new roman
+    fontsize: 1.2rem
+    css: styles.css
+    toc: true
+
+editor: visual
+

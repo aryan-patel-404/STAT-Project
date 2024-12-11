@@ -1,0 +1,188 @@
+---
+title: "Codes"
+format: html
+editor: visual
+toc: true
+about: 
+  template: solana
+---
+
+# Code 1
+```{r}
+library(ggplot2)
+library(dplyr)
+
+# Load the dataset (replace with actual file path)
+loan_data <- read.csv("/Users/aryanpatelkolagani/Downloads/loan_dataset.csv", sep = ";", stringsAsFactors = FALSE)
+
+# Parse columns correctly if needed
+if (ncol(loan_data) == 1) {
+  loan_data <- read.csv("path_to_dataset.csv", sep = ",", stringsAsFactors = FALSE)
+}
+
+# Handle missing values
+loan_data <- loan_data %>% 
+  mutate(
+    Loan_Status = as.factor(Loan_Status),
+    Credit_History = as.factor(Credit_History),
+    LoanAmount = as.numeric(LoanAmount),
+    Loan_Amount_Term = as.numeric(Loan_Amount_Term),
+    ApplicantIncome = as.numeric(ApplicantIncome),
+    CoapplicantIncome = as.numeric(CoapplicantIncome)
+  ) %>%
+  filter(!is.na(Loan_Status))
+
+# Logistic Regression Model
+model <- glm(Loan_Status ~ ApplicantIncome + CoapplicantIncome + LoanAmount +
+               Loan_Amount_Term + Credit_History + Property_Area + Education,
+             data = loan_data, family = "binomial")
+
+# Display the summary of the model
+summary(model)
+
+# 1. Credit History vs Loan Status
+ggplot(loan_data, aes(x = Credit_History, fill = Loan_Status)) +
+  geom_bar(position = "fill") +
+  labs(title = "Loan Status by Credit History", x = "Credit History", y = "Proportion") +
+  theme_minimal()
+
+ # 2. Property Area vs Loan Status
+ggplot(loan_data, aes(x = Property_Area, fill = Loan_Status)) +
+  geom_bar(position = "dodge") +
+  labs(title = "Loan Status by Property Area", x = "Property Area", y = "Count") +
+  theme_minimal()
+```
+
+# Code 2
+
+```{r}
+if (!requireNamespace("corrplot", quietly = TRUE)) install.packages("corrplot")
+if (!requireNamespace("GGally", quietly = TRUE)) install.packages("GGally")
+library(ggplot2)
+library(dplyr)
+library(corrplot)
+library(GGally)
+
+# Load the dataset (replace with the correct file path)
+loan_data <- read.csv("/Users/aryanpatelkolagani/Downloads/loan_dataset.csv", sep = ";", stringsAsFactors = FALSE)
+
+# Parse and clean dataset
+if (ncol(loan_data) == 1) {
+  loan_data <- read.csv("/Users/aryanpatelkolagani/Downloads/loan_dataset.csv", sep = ",", stringsAsFactors = FALSE)
+}
+
+# Handle missing values
+loan_data$LoanAmount[is.na(loan_data$LoanAmount)] <- median(loan_data$LoanAmount, na.rm = TRUE)
+loan_data$ApplicantIncome <- as.numeric(loan_data$ApplicantIncome)
+loan_data$CoapplicantIncome <- as.numeric(loan_data$CoapplicantIncome)
+
+# Create TotalIncome column
+loan_data <- loan_data %>%
+  mutate(TotalIncome = ApplicantIncome + CoapplicantIncome)
+
+# Visualize correlations
+# Select numeric columns
+numeric_data <- loan_data %>%
+  select(ApplicantIncome, CoapplicantIncome, LoanAmount, TotalIncome)
+
+# Compute the correlation matrix
+cor_matrix <- cor(numeric_data, use = "complete.obs")
+
+# Correlation heatmap
+corrplot(cor_matrix, method = "color", type = "full",
+         tl.col = "black", tl.srt = 45,
+         title = "Correlation Matrix", mar = c(0, 0, 1, 0))
+
+# Pair plot for relationships
+ggpairs(numeric_data, title = "Pair Plot of Numeric Variables")
+
+# Correlation analysis
+cor_applicant <- cor(loan_data$ApplicantIncome, loan_data$LoanAmount, use = "complete.obs")
+cor_coapplicant <- cor(loan_data$CoapplicantIncome, loan_data$LoanAmount, use = "complete.obs")
+cor_total <- cor(loan_data$TotalIncome, loan_data$LoanAmount, use = "complete.obs")
+print(paste("Correlation between Applicant Income and Loan Amount:", cor_applicant))
+print(paste("Correlation between Coapplicant Income and Loan Amount:", cor_coapplicant))
+print(paste("Correlation between Total Income and Loan Amount:", cor_total))
+
+# Linear regression: Loan Amount predicted by Total Income
+model_income <- lm(LoanAmount ~ TotalIncome, data = loan_data)
+summary(model_income)
+
+# Extract residuals and add them to a filtered dataset
+loan_data_filtered <- loan_data[complete.cases(loan_data$TotalIncome, loan_data$LoanAmount), ]
+loan_data_filtered$residuals <- residuals(model_income)
+
+# Residual plot
+ggplot(data = loan_data_filtered, aes(x = TotalIncome, y = residuals)) +
+  geom_point(alpha = 0.6, color = "purple") +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "red") +
+  labs(title = "Residual Plot for Total Income vs Loan Amount",
+       x = "Total Income", y = "Residuals") +
+  theme_minimal()
+
+# Diagnostic plots for the linear regression model
+par(mfrow = c(2, 2))
+plot(model_income)
+```
+
+# Code 3
+```{r}
+# Load necessary libraries
+library(caret)
+library(dplyr)
+library(glmnet)
+library(ggplot2)
+
+# Load dataset
+loan_data <- read.csv("/Users/aryanpatelkolagani/Downloads/loan_dataset.csv", sep = ";")
+
+# Data Preparation
+loan_data <- loan_data %>%
+  mutate(
+    Loan_Status = ifelse(Loan_Status == "Y", 1, 0), # Convert Loan_Status to binary
+    Loan_Status = as.factor(Loan_Status),           # Convert to factor for classification
+    Education = as.factor(Education),
+    ApplicantIncome = as.numeric(ApplicantIncome)
+  )
+
+# Handle Missing Values
+loan_data <- loan_data %>%
+  filter(!is.na(ApplicantIncome) & !is.na(LoanAmount))
+
+# Split data into training and testing sets
+set.seed(123)
+train_index <- createDataPartition(loan_data$Loan_Status, p = 0.7, list = FALSE)
+train_data <- loan_data[train_index, ]
+test_data <- loan_data[-train_index, ]
+
+# Prepare Features and Target Variables
+x_train <- model.matrix(Loan_Status ~ ApplicantIncome + Education, data = train_data)[, -1]
+x_test <- model.matrix(Loan_Status ~ ApplicantIncome + Education, data = test_data)[, -1]
+y_train <- as.numeric(as.character(train_data$Loan_Status))
+y_test <- as.numeric(as.character(test_data$Loan_Status))
+
+# Lasso Regression
+set.seed(123)
+lasso_model <- cv.glmnet(x_train, y_train, alpha = 1, family = "binomial")
+lasso_prob <- predict(lasso_model, newx = x_test, s = "lambda.min", type = "response")
+lasso_predictions <- ifelse(lasso_prob > 0.5, 1, 0)
+lasso_accuracy <- mean(lasso_predictions == y_test)
+cat("Lasso Accuracy:", lasso_accuracy, "\n")
+
+# Summary
+cat("Model Evaluation Summary:\n")
+cat("Lasso Accuracy:", lasso_accuracy, "\n")
+
+
+# Visualization for Applicant Income, Education, and Loan Status
+ggplot(loan_data, aes(x = Education, y = ApplicantIncome, fill = Loan_Status)) +
+  geom_bar(stat = "summary", fun = "mean", position = "dodge") +
+  labs(
+    title = "Average Applicant Income by Education and Loan Status",
+    x = "Education",
+    y = "Average Applicant Income",
+    fill = "Loan Status"
+  ) +
+  theme_minimal()
+```
+

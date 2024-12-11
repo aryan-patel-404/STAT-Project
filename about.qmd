@@ -1,0 +1,66 @@
+---
+title: "About Us"
+format: html
+editor: visual
+toc: true
+about: 
+  template: solana
+---
+# Rithvik Madhavaram
+```{r setup2, include=FALSE}
+library(knitr)
+opts_chunk$set(echo = FALSE,
+               out.width = "50%", 
+               fig.align = "center")
+
+```
+
+```{r image2}
+include_graphics(c("Rithvik_pic.PNG"))
+```
+
+I’m Rithvik Madhavaram, currently pursuing a Master’s in Data Analytics Engineering at George Mason University. I hold a Bachelor’s in Electronics and Communication Engineering from Chaitanya Bharathi Institute of Technology. My skills include Python, C, Java, and Verilog, with experience in data structures and algorithms.
+
+I have worked on projects such as a face detection system using OpenCV and a Turbo coder for error correction in digital communication. My internships at Hindustan Aeronautics Limited and IBM have provided me with valuable insights into hydraulic systems and artificial intelligence.
+
+Beyond academics, I enjoy dancing, listening to music, playing cricket, and watching Formula 1. I am passionate about leveraging my skills to contribute to innovative solutions in data analytics.
+
+# Aryan Patel Kolagani
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(echo = FALSE,
+               out.width = "50%", 
+               fig.align = "center")
+
+```
+
+```{r image}
+include_graphics(c("Aryan_pic.jpg"))
+```
+
+
+
+
+Hi, Welcome to my Professional Website. I am Aryan Patel Kolagani. I am 21 Yrs Old. I am a Student at George Mason University, currently pursuing Masters in Data Analytics Engineering. I am an aspiring Data Engineer. I mainly focuses on Cloud Data Management and Visualization of Data. I have completed my Bachelor’s of Engineering in Electronics and Communication Engineering from Chaitanya Bharathi Institute of Technology, India in 2024.
+
+My Hobbies are Photography, Movies, Reading Books and Re-watching Harry Potter.
+
+Feel free to explore this website.
+
+# Kashyap Kandibanda
+
+```{r setup3, include=FALSE}
+library(knitr)
+opts_chunk$set(echo = FALSE,
+               out.width = "50%", 
+               fig.align = "center")
+
+```
+
+```{r image3}
+include_graphics(c("Kashyap_pic.jpg"))
+```
+
+
+I am pursuing an MS in Data Analytics Engineering at George Mason University. With a background in mechanical engineering from Amrita School of Engineering, I have honed my problem-solving and data analysis skills. I’m passionate about using data-driven insights to solve complex problems, improve processes, and drive innovation. I also have experience in leadership roles through extracurricular activities, such as organizing workshops and volunteer projects, reflecting my teamwork and management abilities.
